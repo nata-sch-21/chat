@@ -1,25 +1,25 @@
-import React, { Component } from 'react'
+import React, { Component, ReactNode } from 'react';
 import axios from 'axios';
 
 class PingComponent extends Component {
-
   state = {
-    pong: 'pending'
-  }
+    pong: 'pending',
+  };
 
   componentDidMount() {
-    axios.get('api/ping')
+    axios
+      .get('api/ping')
       .then((response) => {
         this.setState(() => {
-          return { pong: response.data.message }
-        })
+          return { pong: response.data.message };
+        });
       })
       .catch(function (error) {
         console.log(error);
       });
-
   }
-  render() {
+
+  render(): ReactNode {
     return <h1>Ping {this.state.pong}</h1>;
   }
 }
