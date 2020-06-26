@@ -4,10 +4,9 @@ build:
     worker:
       dockerfile: Dockerfile
       target: builder
-    command:
-      - printenv
+    command: "RUN printenv"
 release:
   image: worker
   command:
     - ./migrate.sh
-    - printenv
+    - "RUN printenv"
