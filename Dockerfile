@@ -10,6 +10,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags "-w" -a -o /main .
 FROM node:alpine AS node_builder
 COPY --from=builder /app/client ./
 RUN node ./scripts/configs.js
+RUN printenv
 RUN cat .env
 RUN yarn
 RUN yarn build
@@ -23,3 +24,4 @@ COPY --from=node_builder /build ./web
 RUN chmod +x ./main
 EXPOSE 8080
 CMD ./main
+RUN printenv
