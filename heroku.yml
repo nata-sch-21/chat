@@ -9,4 +9,3 @@ release:
   image: worker
   command:
     - ./migrate.sh
-    - printenv
