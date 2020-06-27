@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { GoogleLogin } from 'react-google-login';
+import axios from 'axios';
 
 import logo from './logo.svg';
 import './App.css';
 import PingComponent from './PingComponent';
 
 const App: React.FC = () => {
-  const clientId: string = process.env.REACT_APP_GOOGLE_CLIENT_ID || process.env.GOOGLE_CLIENT_ID || '';
-  console.log(clientId);
-  console.log(process.env);
+  const [config, setConfig] = useState<{ [key: string]: string } | null>(null);
+
+  useEffect(() => {
+    axios
+      .get('api/config')
+      .then((response) => {
+        setConfig(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
+  if (!config) {
+    return <div className="App">Getting configs</div>;
+  }
+  console.log(config);
+
+  const clientId: string = config.REACT_APP_GOOGLE_CLIENT_ID || process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
   return (
     <div className="App">
       <header className="App-header">
@@ -29,7 +46,7 @@ const App: React.FC = () => {
           }
         }}
         onFailure={(res): void => console.log(res)}
-        isSignedIn={true}
+        // isSignedIn={true}
       />
     </div>
   );

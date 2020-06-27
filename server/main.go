@@ -36,7 +36,17 @@ func pingFunc(db *sql.DB) gin.HandlerFunc {
 		}
 
 		c.JSON(200, gin.H{
-			"message": message+os.Getenv("DATABASE_URL")+os.Getenv("REACT_APP_GOOGLE_CLIENT_ID"),
+			"message": message,
+		})
+	}
+}
+
+func configFunc() gin.HandlerFunc {
+
+	return func(c *gin.Context) {
+
+		c.JSON(200, gin.H{
+			"REACT_APP_GOOGLE_CLIENT_ID": os.Getenv("REACT_APP_GOOGLE_CLIENT_ID"),
 		})
 	}
 }
@@ -55,6 +65,7 @@ func main() {
 	}
 	log.Println("booyah")
 	api.GET("/ping", pingFunc(db))
+	api.GET("/config", configFunc())
 
 	r.Run()
 }
