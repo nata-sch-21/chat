@@ -36,7 +36,7 @@ func pingFunc(db *sql.DB) gin.HandlerFunc {
 		}
 
 		c.JSON(200, gin.H{
-			"message": message,
+			"message": message+os.Getenv("DATABASE_URL")+os.Getenv("REACT_APP_GOOGLE_CLIENT_ID"),
 		})
 	}
 }
