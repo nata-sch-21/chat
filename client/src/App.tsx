@@ -23,9 +23,7 @@ const App: React.FC = () => {
   if (!config) {
     return <div className="App">Getting configs</div>;
   }
-  console.log(config);
 
-  const clientId: string = config.REACT_APP_GOOGLE_CLIENT_ID || process.env.REACT_APP_GOOGLE_CLIENT_ID || '';
   return (
     <div className="App">
       <header className="App-header">
@@ -39,14 +37,14 @@ const App: React.FC = () => {
         <PingComponent />
       </header>
       <GoogleLogin
-        clientId={clientId}
+        clientId="132320294276-086d3v5np79k30cgd8j23ca22avssfkn.apps.googleusercontent.com"
         onSuccess={(response): void => {
+          console.log(response);
           if ('profileObj' in response) {
             console.log(response.profileObj);
           }
         }}
         onFailure={(res): void => console.log(res)}
-        // isSignedIn={true}
       />
     </div>
   );
