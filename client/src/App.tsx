@@ -1,29 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { GoogleLogin } from 'react-google-login';
-import axios from 'axios';
+import React from 'react';
 
 import logo from './logo.svg';
 import './App.css';
 import PingComponent from './PingComponent';
 
 const App: React.FC = () => {
-  const [config, setConfig] = useState<{ [key: string]: string } | null>(null);
-
-  useEffect(() => {
-    axios
-      .get('api/config')
-      .then((response) => {
-        setConfig(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
-
-  if (!config) {
-    return <div className="App">Getting configs</div>;
-  }
-
   return (
     <div className="App">
       <header className="App-header">
@@ -36,16 +17,6 @@ const App: React.FC = () => {
         </a>
         <PingComponent />
       </header>
-      <GoogleLogin
-        clientId="132320294276-086d3v5np79k30cgd8j23ca22avssfkn.apps.googleusercontent.com"
-        onSuccess={(response): void => {
-          console.log(response);
-          if ('profileObj' in response) {
-            console.log(response.profileObj);
-          }
-        }}
-        onFailure={(res): void => console.log(res)}
-      />
     </div>
   );
 };

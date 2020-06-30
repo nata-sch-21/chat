@@ -46,7 +46,8 @@ func configFunc() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
 		c.JSON(200, gin.H{
-			"REACT_APP_GOOGLE_CLIENT_ID": os.Getenv("REACT_APP_GOOGLE_CLIENT_ID"),
+			"clientId": os.Getenv("CLIENT_ID"),
+			"baseUrl": os.Getenv("BASE_URL"),
 		})
 	}
 }
