@@ -1,8 +1,8 @@
 import React from 'react';
-import { hot } from 'react-hot-loader/root';
+import { hot } from 'react-hot-loader';
 import Ping from './components/Ping';
 
-// import './styles/index.scss';
+import './styles/index.scss';
 
 const App: React.FC = () => {
   return (
@@ -20,4 +20,4 @@ const App: React.FC = () => {
   );
 };
 
-export default hot(App);
+export default hot(module)(App);

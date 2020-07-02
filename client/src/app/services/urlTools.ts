@@ -32,4 +32,4 @@ export const historyReplaceState = (url: string, title = document.title, data = 
   window.history.replaceState(data, title, url);
 };
 
-export const replaceSlashes = (string: string) => string.replace(/\//g, '\\/');
+export const replaceSlashes = (string: string): string => string.replace(/\//g, '\\/');
