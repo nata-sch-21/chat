@@ -33,3 +33,6 @@ DATABASE_URL=postgres://postgres:mysecretpassword@localhost:5432/chat?sslmode=di
 6. if not, create user in DB
 7. if exists return user
 8. save googleId and accessToken in session storage
+
+const tokenRes: Response = await fetch(`https://oauth2.googleapis.com/tokeninfo?access_token=${accessToken}`); //verify tocken
+const d = await tokenRes.json(); // return d.error if not valid

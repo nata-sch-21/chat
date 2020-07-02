@@ -48,6 +48,8 @@ func configFunc() gin.HandlerFunc {
 		c.JSON(200, gin.H{
 			"clientId": os.Getenv("CLIENT_ID"),
 			"baseUrl": os.Getenv("BASE_URL"),
+			"authUrl": os.Getenv("AUTH_URL"),
+			"userInfoUrl": os.Getenv("USER_INFO_URL"),
 		})
 	}
 }
