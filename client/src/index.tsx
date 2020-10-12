@@ -12,7 +12,7 @@ const root = document.getElementById('root');
 
 const init = async (config: Config): Promise<void> => {
   const authUser = await auth(config);
-  console.log(authUser);
+  console.log('change');
 
   const store = configureStore();
 
