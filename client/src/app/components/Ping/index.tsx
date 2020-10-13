@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadPing } from '../../actions';
 import { selectPingData, selectPingLoading } from '../../reducers/ping';
 
-const url = 'ws://' + window.location.host + '/ws';
+const url = 'wss://' + window.location.host + '/ws';
 const ws = new WebSocket(url);
 
 ws.onopen = function () {
