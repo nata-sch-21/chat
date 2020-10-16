@@ -103,6 +103,7 @@ func configFunc() gin.HandlerFunc {
 			"baseUrl": os.Getenv("BASE_URL"),
 			"authUrl": os.Getenv("AUTH_URL"),
 			"userInfoUrl": os.Getenv("USER_INFO_URL"),
+			"wsUrl": os.Getenv("WS_URL"),
 		})
 	}
 }
