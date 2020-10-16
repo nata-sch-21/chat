@@ -19,7 +19,10 @@ export const getHashParams = (): Params => {
 export const redirectToUrl = (path: string, params: Params | null): void => {
   if (params) {
     const queryString = keys(params)
-      .map((key: string) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+      .map(
+        (key: string) =>
+          `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`,
+      )
       .join('&');
 
     path += `?${queryString}`;
@@ -28,8 +31,13 @@ export const redirectToUrl = (path: string, params: Params | null): void => {
   window.location.href = path;
 };
 
-export const historyReplaceState = (url: string, title = document.title, data = ''): void => {
+export const historyReplaceState = (
+  url: string,
+  title = document.title,
+  data = '',
+): void => {
   window.history.replaceState(data, title, url);
 };
 
-export const replaceSlashes = (string: string): string => string.replace(/\//g, '\\/');
+export const replaceSlashes = (string: string): string =>
+  string.replace(/\//g, '\\/');

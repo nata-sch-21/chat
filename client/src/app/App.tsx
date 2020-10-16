@@ -1,21 +1,24 @@
 import React from 'react';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
-import Ping from './components/Ping';
+import { Chat } from './components/Chat';
 
 import './styles/index.scss';
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-      <Ping />
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <Chat />
+          </Route>
+          <Route exact path="/404">
+            <div>404</div>
+          </Route>
+          <Redirect to="/404" />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 };

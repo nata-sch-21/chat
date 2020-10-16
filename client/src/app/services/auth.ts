@@ -1,6 +1,6 @@
 import localStorage from './localStorage';
 import { getHashParams, redirectToUrl, historyReplaceState } from './urlTools';
-import { Config } from './getEnv';
+import { Env } from './getEnv';
 
 export const ACCESS_TOKEN = 'access_token';
 export const CLIENT_ID = 'client_id';
@@ -15,11 +15,13 @@ interface AuthUser {
   family_name: string;
   picture: string;
   email: string;
-  // email_verified: true
-  // locale: "ru"
 }
 
-const redirectToAuth = (authUrl: string, baseUrl: string, clientId: string): void => {
+const redirectToAuth = (
+  authUrl: string,
+  baseUrl: string,
+  clientId: string,
+): void => {
   redirectToUrl(authUrl, {
     [CLIENT_ID]: clientId,
     [REDIRECT_URI]: baseUrl,
@@ -28,8 +30,16 @@ const redirectToAuth = (authUrl: string, baseUrl: string, clientId: string): voi
   });
 };
 
-export const auth = async ({ clientId, baseUrl, authUrl, userInfoUrl }: Config): Promise<AuthUser> => {
-  let accessToken = window.location.hash.indexOf(ACCESS_TOKEN) !== -1 ? getHashParams()[ACCESS_TOKEN] : '';
+export const auth = async ({
+  clientId,
+  baseUrl,
+  authUrl,
+  userInfoUrl,
+}: Env): Promise<AuthUser> => {
+  let accessToken =
+    window.location.hash.indexOf(ACCESS_TOKEN) !== -1
+      ? getHashParams()[ACCESS_TOKEN]
+      : '';
 
   if (accessToken) {
     localStorage.setItem(ACCESS_TOKEN, accessToken);

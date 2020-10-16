@@ -1,4 +1,4 @@
-import { Config } from './getEnv';
+import { Env } from './getEnv';
 
 export interface ApiResponse {
   data?: object;
@@ -7,7 +7,7 @@ export interface ApiResponse {
 }
 
 export interface ApiResponseConfig extends ApiResponse {
-  data?: Config;
+  data?: Env;
 }
 
 export const fetchConfig = async (): Promise<ApiResponseConfig> => {

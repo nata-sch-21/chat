@@ -1,27 +1,23 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadPing } from '../../actions';
+import { loadPing, emitMessage } from '../../actions';
 import { selectPingData, selectPingLoading } from '../../reducers/ping';
 
 const url = 'wss://' + window.location.host + '/ws';
-const ws = new WebSocket(url);
+// const url = 'ws://localhost:8080/ws';
+const ws: WebSocket = new WebSocket(url);
 
 ws.onopen = function () {
   console.log('Opening a connection...');
 };
-ws.onclose = function (evt) {
+ws.onclose = function () {
   console.log("I'm sorry. Bye!");
 };
-ws.onerror = function (evt) {
+ws.onerror = function () {
   console.log('ERR: ');
 };
-ws.onmessage = (msg) => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-  // @ts-ignore
-  console.log(JSON.parse(msg.data));
-};
 
-const Ping: React.FC = () => {
+export const Ping: React.FC = () => {
   const dispatch = useDispatch();
   const loading = useSelector(selectPingLoading);
   const ping = useSelector(selectPingData);
@@ -38,15 +34,19 @@ const Ping: React.FC = () => {
 
     ws.send(JSON.stringify(message));
   };
+  const onClick2 = () => {
+    dispatch(emitMessage());
+  };
 
   return (
     <div>
       <button id="send" className="btn" onClick={onClick}>
         Send
       </button>
+      <button id="send" className="btn" onClick={onClick2}>
+        Send2
+      </button>
       <div>{loading ? 'Loading ...' : `Ping ${ping}`}</div>
     </div>
   );
 };
-
-export default Ping;

@@ -2,3 +2,4 @@
 /build
 /public
 config-overrides.js
+./.prettierrc.js

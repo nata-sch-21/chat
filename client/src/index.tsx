@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './app/App';
-import { Config, getEnv } from './app/services/getEnv';
+import { Env, getEnv } from './app/services/getEnv';
 import { auth } from './app/services/auth';
 import configureStore from './app/store';
 
@@ -10,15 +10,14 @@ import './index.css';
 
 const root = document.getElementById('root');
 
-const init = async (config: Config): Promise<void> => {
-  const authUser = await auth(config);
+const init = async (env: Env): Promise<void> => {
+  const authUser = await auth(env);
   console.log(authUser);
 
-  const store = configureStore();
+  const store = configureStore(env);
 
   // store.dispatch(actions.setUser(data));
 
-  // render(<App  />, document.getElementById('root'));
   render(
     <Provider store={store}>
       <App />

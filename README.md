@@ -23,7 +23,7 @@ create database gotutorial;
 - create migration
 goose -dir migrations create initial_seed sql
 - run migration
-goose -dir migrations postgres "postgres://postgres:mysecretpassword@localhost:5432/gotutorial?sslmode=disable" up
+goose -dir migrations postgres "postgres://postgres:mysecretpassword@localhost:5432/chat?sslmode=disable" up
 
 ### Dev
 

@@ -2,14 +2,16 @@ import { createStore, applyMiddleware, Store } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
 import { rootReducer } from './reducers';
-import { sagas } from './sagas';
+import { rootSaga } from './sagas';
+import { Env } from './services/getEnv';
 
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
 
-export default function configureStore(): Store {
-  // sagas.forEach((saga) => sagaMiddleware.run(saga, container));
+export default function configureStore(env: Env): Store {
   const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
-  sagas.forEach((saga) => sagaMiddleware.run(saga));
+
+  const socket = new WebSocket(env.wsUrl);
+  sagaMiddleware.run(rootSaga, { socket });
   return store;
 }

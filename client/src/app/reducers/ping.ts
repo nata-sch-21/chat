@@ -19,8 +19,10 @@ const initialState = {
   loading: false,
 };
 
-export const selectPingData = (state: GlobalState): string => state[PING_NS].data;
-export const selectPingLoading = (state: GlobalState): boolean => state[PING_NS].loading;
+export const selectPingData = (state: GlobalState): string =>
+  state[PING_NS].data;
+export const selectPingLoading = (state: GlobalState): boolean =>
+  state[PING_NS].loading;
 
 export const pingReducer = createReducer<PingState, PingActions>(initialState, {
   LOAD_PING_REQUEST: (state) => ({

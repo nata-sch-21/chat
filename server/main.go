@@ -71,7 +71,6 @@ func handleMessages() {
 }
 
 func registerPing(db *sql.DB) {
-
 	_, err := db.Exec("INSERT INTO ping_timestamp (occurred) VALUES ($1)", time.Now())
 	if err != nil {
 		log.Println("Couldn't insert the ping")
@@ -80,9 +79,7 @@ func registerPing(db *sql.DB) {
 }
 
 func pingFunc(db *sql.DB) gin.HandlerFunc {
-
 	return func(c *gin.Context) {
-
 		defer registerPing(db)
 		r := db.QueryRow("SELECT occurred FROM ping_timestamp ORDER BY id DESC LIMIT 1")
 		var lastDate pq.NullTime
@@ -111,7 +108,6 @@ func configFunc() gin.HandlerFunc {
 }
 
 func main() {
-
 	r := gin.Default()
 	// Serving static content from web - we will populate this from within the docker container
 	r.Use(static.Serve("/", static.LocalFile("./web", true)))
