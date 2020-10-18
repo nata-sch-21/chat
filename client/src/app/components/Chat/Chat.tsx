@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { Message } from '../../types';
 import { ChatHeader } from '../ChatHeader';
+import { redirectToUrl } from '../../services/urlTools';
 
 import './Chat.scss';
 
@@ -28,6 +29,13 @@ export const Chat: React.FC = () => {
   return (
     <div className="App">
       <div className="container">
+        <button
+          onClick={() => {
+            redirectToUrl(`${window.location.origin}/ping`);
+          }}
+        >
+          Ping
+        </button>
         <ChatHeader />
         <div className="chatbox">
           {/*<div className="chatbox__user-list">*/}

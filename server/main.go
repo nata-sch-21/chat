@@ -114,6 +114,7 @@ func main() {
 	r := gin.Default()
 	// Serving static content from web - we will populate this from within the docker container
 	r.Use(static.Serve("/", static.LocalFile("./web", true)))
+	r.Use(static.Serve("/ping", static.LocalFile("./web", true)))
 	api := r.Group("/api")
 	dbUrl := os.Getenv("DATABASE_URL")
 	log.Printf("DB [%s]", dbUrl)

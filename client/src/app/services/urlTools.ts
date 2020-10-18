@@ -16,7 +16,7 @@ export const getHashParams = (): Params => {
   return params;
 };
 
-export const redirectToUrl = (path: string, params: Params | null): void => {
+export const redirectToUrl = (path: string, params?: Params): void => {
   if (params) {
     const queryString = keys(params)
       .map(
