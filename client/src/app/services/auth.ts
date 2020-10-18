@@ -1,6 +1,7 @@
 import localStorage from './localStorage';
 import { getHashParams, redirectToUrl, historyReplaceState } from './urlTools';
 import { Env } from './getEnv';
+import { User } from '../types';
 
 export const ACCESS_TOKEN = 'access_token';
 export const CLIENT_ID = 'client_id';
@@ -35,7 +36,7 @@ export const auth = async ({
   baseUrl,
   authUrl,
   userInfoUrl,
-}: Env): Promise<AuthUser> => {
+}: Env): Promise<User> => {
   let accessToken =
     window.location.hash.indexOf(ACCESS_TOKEN) !== -1
       ? getHashParams()[ACCESS_TOKEN]
@@ -64,5 +65,10 @@ export const auth = async ({
     redirectToAuth(authUrl, baseUrl, clientId);
   }
 
-  return data;
+  return {
+    id: data.sub,
+    email: data.email,
+    avatar: data.picture,
+    username: data.name,
+  };
 };

@@ -2,7 +2,7 @@ import { ApiResponseConfig, fetchConfig } from './api';
 
 const devConfigs = {
   clientId: process.env.REACT_APP_CLIENT_ID || '',
-  baseUrl: process.env.REACT_APP_BASE_URL || '',
+  baseUrl: process.env.REACT_APP_BASE_URL || window.location.origin,
   authUrl: process.env.REACT_APP_AUTH_URL || '',
   userInfoUrl: process.env.REACT_APP_USER_INFO_URL || '',
   wsUrl: process.env.REACT_APP_WS_URL || '',

@@ -1,42 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { Ping } from '../Ping';
+import { Message } from '../../types';
+import { ChatHeader } from '../ChatHeader';
+
+import './Chat.scss';
 
 export const Chat: React.FC = () => {
-  // const messagessss = [
-  //   {
-  //     id: 1,
-  //     text: 'My message',
-  //     createdAt: new Date(Date.UTC(2016, 5, 11, 17, 20, 0)),
-  //     user: {
-  //       id: 1,
-  //       name: 'Me',
-  //       avatar: 'https://facebook.github.io/react/img/logo_og.png',
-  //     },
-  //     image: 'https://facebook.github.io/react/img/logo_og.png',
-  //     // Any additional custom parameters are passed through
-  //   },
-  //   {
-  //     id: 3,
-  //     text: 'Hello developer',
-  //     createdAt: new Date(),
-  //     user: {
-  //       id: 3,
-  //       name: 'React',
-  //       avatar: 'https://facebook.github.io/react/img/logo_og.png',
-  //     },
-  //   },
-  // ];
-  //
-  // const [messages, setMessages] = useState(messagessss);
+  const msg = [
+    {
+      id: 'sdsds',
+      message: 'My message',
+      username: 'developer',
+      email: 'developer@gmail.com',
+      avatar: 'https://facebook.github.io/react/img/logo_og.png',
+    },
+    {
+      id: 'adsad',
+      message: 'not my message',
+      username: 'not_developer',
+      email: 'not_developer@gmail.com',
+      avatar: 'https://facebook.github.io/react/img/logo_og.png',
+    },
+  ];
 
+  const [messages] = useState<Message[]>(msg);
+  console.log(messages);
   return (
     <div className="App">
-      <div className="Chat"></div>
-
-      <Ping />
-      <div>
-        <img src="logo192.png" alt="" />
+      <div className="container">
+        <ChatHeader />
+        <div className="chatbox">
+          {/*<div className="chatbox__user-list">*/}
+          {/*  <h1>User list</h1>*/}
+          {/*  <div className="chatbox__user--active">*/}
+          {/*    <p>Jack Thomson</p>*/}
+          {/*  </div>*/}
+          {/*  <div className="chatbox__user--busy">*/}
+          {/*    <p>Angelina Jolie</p>*/}
+          {/*  </div>*/}
+          {/*</div>*/}
+          <div className="chatbox__messages">
+            <div className="chatbox__messages__user-message">
+              <div className="chatbox__messages__user-message--ind-message">
+                <p className="name">name</p>
+                <br />
+                <p className="message">text</p>
+              </div>
+            </div>
+          </div>
+          <form>
+            <input type="text" placeholder="Enter your message" />
+          </form>
+        </div>
       </div>
     </div>
   );

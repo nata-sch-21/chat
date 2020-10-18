@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadPing, emitMessage } from '../../actions';
+import { loadPing, sendMessage } from '../../actions';
 import { selectPingData, selectPingLoading } from '../../reducers/ping';
 
-const url = 'wss://' + window.location.host + '/ws';
-// const url = 'ws://localhost:8080/ws';
+// const url = 'wss://' + window.location.host + '/ws';
+const url = 'ws://localhost:8080/ws';
 const ws: WebSocket = new WebSocket(url);
 
 ws.onopen = function () {
@@ -35,7 +35,7 @@ export const Ping: React.FC = () => {
     ws.send(JSON.stringify(message));
   };
   const onClick2 = () => {
-    dispatch(emitMessage());
+    dispatch(sendMessage());
   };
 
   return (

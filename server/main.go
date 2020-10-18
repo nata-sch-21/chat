@@ -17,6 +17,8 @@ type Message struct {
     Email    string `json:"email"`
     Username string `json:"username"`
     Message  string `json:"message"`
+    Id       string `json:"id"`
+    Avatar   string `json:"avatar"`
 }
 
 var clients = make(map[*websocket.Conn]bool) // connected clients

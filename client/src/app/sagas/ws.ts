@@ -1,6 +1,6 @@
 import { take, call, apply, takeLatest } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
-import { emitMessage } from '../actions';
+import { sendMessage } from '../actions';
 
 function initWebsocket(ws: WebSocket) {
   return eventChannel((emit) => {
@@ -60,7 +60,7 @@ export function* handleEvent(socket: WebSocket) {
   }
 }
 
-function* runEmitMessage(socket: WebSocket) {
+function* runSendMessage(socket: WebSocket) {
   try {
     // yield delay(5000);
     const data = JSON.stringify({
@@ -75,5 +75,5 @@ function* runEmitMessage(socket: WebSocket) {
 }
 
 export function* handleEmitMessage(socket: WebSocket) {
-  yield takeLatest(emitMessage, runEmitMessage, socket);
+  yield takeLatest(sendMessage, runSendMessage, socket);
 }

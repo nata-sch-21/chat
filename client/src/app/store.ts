@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, Store } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { rootReducer } from './reducers';
 import { rootSaga } from './sagas';
@@ -9,7 +10,10 @@ import { Env } from './services/getEnv';
 const sagaMiddleware = createSagaMiddleware();
 
 export default function configureStore(env: Env): Store {
-  const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+  const store = createStore(
+    rootReducer,
+    composeWithDevTools(applyMiddleware(sagaMiddleware)),
+  );
 
   const socket = new WebSocket(env.wsUrl);
   sagaMiddleware.run(rootSaga, { socket });
