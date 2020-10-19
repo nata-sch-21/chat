@@ -35,7 +35,15 @@ export const Ping: React.FC = () => {
     ws.send(JSON.stringify(message));
   };
   const onClick2 = () => {
-    dispatch(sendMessage());
+    dispatch(
+      sendMessage({
+        id: 'adsad',
+        message: 'not my message',
+        username: 'not_developer',
+        email: 'not_developer@gmail.com',
+        avatar: 'https://facebook.github.io/react/img/logo_og.png',
+      }),
+    );
   };
 
   return (

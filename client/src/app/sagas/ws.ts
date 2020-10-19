@@ -1,6 +1,8 @@
-import { take, call, apply, takeLatest } from 'redux-saga/effects';
+import { take, call, apply, takeLatest, put } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
-import { sendMessage } from '../actions';
+import { ActionType } from 'typesafe-actions';
+
+import { sendMessage, setMessage } from '../actions';
 
 function initWebsocket(ws: WebSocket) {
   return eventChannel((emit) => {
@@ -20,18 +22,7 @@ function initWebsocket(ws: WebSocket) {
       }
 
       if (msg) {
-        console.log('----msg', msg);
-        emit({ type: 'LALA', payload: msg });
-        // const { payload: book } = msg;
-        // const channel = msg.channel;
-        // switch (channel) {
-        //   case 'ADD_BOOK':
-        //     return emitter({ type: ADD_BOOK, book })
-        //   case 'REMOVE_BOOK':
-        //     return emitter({ type: REMOVE_BOOK, book })
-        //   default:
-        //   // nothing to do
-        // }
+        emit(msg);
       }
     };
     // unsubscribe function
@@ -48,9 +39,7 @@ export function* handleEvent(socket: WebSocket) {
     try {
       // An error from socketChannel will cause the saga jump to the catch block
       const payload = yield take(socketChannel);
-      console.log('payload', payload);
-      // yield put({ type: 'INCOMING_PONG_PAYLOAD', payload });
-      // yield fork(pong, ws);
+      yield put(setMessage(payload));
     } catch (err) {
       console.error('socket error:', err);
       // socketChannel is still open in catch block
@@ -60,13 +49,12 @@ export function* handleEvent(socket: WebSocket) {
   }
 }
 
-function* runSendMessage(socket: WebSocket) {
+function* runSendMessage(
+  socket: WebSocket,
+  { payload }: ActionType<typeof sendMessage>,
+) {
   try {
-    // yield delay(5000);
-    const data = JSON.stringify({
-      username: '-----WS-----USER',
-      message: 'content',
-    });
+    const data = JSON.stringify(payload);
 
     yield apply(socket, socket.send, [data]); // call `emit` as a method with `socket` as context
   } catch (error) {

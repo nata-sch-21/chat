@@ -1,9 +1,11 @@
 import { PingState, PING_NS } from './reducers/ping';
 import { UserState, USER_NS } from './reducers/user';
+import { MessagesState, MESSAGES_NS } from './reducers/messages';
 
 export interface GlobalState {
   [PING_NS]: PingState;
   [USER_NS]: UserState;
+  [MESSAGES_NS]: MessagesState;
 }
 
 export interface User {
